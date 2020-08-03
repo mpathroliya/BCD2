@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BCDetect TF 2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_is_mac">This is machine \nlearning app \nto classify  \histopathological images</string>
+    <string name="select_an_i">Select an Image</string>
+    <string name="detect">Detect</string>
+    <string name="res_primary">Malignant</string>
+    <string name="conf_primary">"97.21"</string>
+    <string name="res_secondary">Malignant</string>
+    <string name="conf_secondary">"2.79"</string>
+    <string name="results_heading">Results</string>
+    <string name="know_more">Know more</string>
+    <string name="image_content">mammogram</string>
+    <string name="try_another">Try another</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="using">Using CNN</string>
+    <string name="machine_lea">IIT(BHU)</string>
+    <string name="breast_canc">Breast\nCancer\nDetection</string>
+</resources>

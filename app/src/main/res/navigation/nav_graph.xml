@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/frame_22">
+
+    <fragment
+        android:id="@+id/frame_22"
+        android:name="com.edge.iitbhu.bcdetecttf_gui.Frame_2"
+        android:label="Frame_2" >
+        <action
+            android:id="@+id/action_frame_22_to_frame_32"
+            app:destination="@id/frame_32" />
+    </fragment>
+    <fragment
+        android:id="@+id/frame_32"
+        android:name="com.edge.iitbhu.bcdetecttf_gui.Frame_3"
+        android:label="Frame_3" />
+</navigation>
