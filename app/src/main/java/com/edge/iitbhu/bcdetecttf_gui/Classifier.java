@@ -48,13 +48,14 @@ public class Classifier {
 
     // Constructor, initilizes model, input & output buffer, and required image dimenions,
     // All of the into the class attributes given above
-    protected Classifier(Activity activity, int numThreads) throws IOException {
-        tfliteModel = FileUtil.loadMappedFile(activity, "bc_mobileNetV2.tflite");
+    protected Classifier(Activity activity, int numThreads,String label_path,String model_path) throws IOException {
+        tfliteModel = FileUtil.loadMappedFile(activity, model_path);
         tfliteOptions.setNumThreads(numThreads);
 
         // TODO: Create a TFLite interpreter instance
         tflite = new Interpreter(tfliteModel, tfliteOptions);
-        labels = FileUtil.loadLabels(activity, "labels.txt");
+//        labels = FileUtil.loadLabels(activity, "labels.txt");
+        labels = FileUtil.loadLabels(activity, label_path);
 
         // Reads type and shape of input and output tensors, respectively.
         int imageTensorIndex = 0;

@@ -13,7 +13,7 @@
     <string name="results_heading">Results</string>
     <string name="know_more">Know more</string>
     <string name="image_content">mammogram</string>
-    <string name="try_another">Try another</string>
+    <string name="try_another"><u>Try Another</u></string>
     <string name="title_activity_main2">Main2Activity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

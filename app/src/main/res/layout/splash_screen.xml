@@ -10,61 +10,56 @@
 
     <View
         android:id="@+id/ss_bubbles"
-        android:layout_width="425dp"
-        android:layout_height="808dp"
+        android:layout_width="414dp"
+        android:layout_height="872dp"
         android:background="@drawable/ic_ss_bubbles"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.511"
+        app:layout_constraintVertical_bias="1.0"
         tools:visibility="visible" />
 
     <TextView
         android:id="@+id/using"
-        android:layout_width="185dp"
-        android:layout_height="35dp"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/red_hat_display_medium"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
         android:text="@string/using"
-        android:fontFamily="@font/red_hat_display_medium"
         android:textAppearance="@style/using"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintStart_toStartOf="@+id/breast_canc"
+        app:layout_constraintTop_toBottomOf="@+id/breast_canc" />
 
     <!-- Breast Cancer Detection -->
 
     <TextView
         android:id="@+id/machine_lea"
         android:layout_width="122dp"
-        android:layout_height="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/red_hat_display_black"
         android:gravity="top"
         android:lineSpacingExtra="0sp"
         android:text="@string/machine_lea"
         android:textAppearance="@style/machine_lea"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintStart_toStartOf="@+id/using"
+        app:layout_constraintTop_toBottomOf="@+id/using" />
 
     <TextView
         android:id="@+id/breast_canc"
-        android:layout_width="342dp"
-        android:layout_height="249dp"
+        android:layout_width="254dp"
+        android:layout_height="209dp"
         android:fontFamily="@font/red_hat_display_black"
         android:gravity="top"
-        android:lineSpacingExtra="0sp"
+        android:lineSpacingExtra="-10dp"
         android:text="@string/breast_canc"
         android:textAppearance="@style/breast_canc"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"

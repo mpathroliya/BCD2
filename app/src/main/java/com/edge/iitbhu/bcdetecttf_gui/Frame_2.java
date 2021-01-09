@@ -18,6 +18,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,20 +42,21 @@ public class Frame_2 extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Classifier classifier;
+    private Classifier rmclassifier;
     private static final int IMAGE_PICK_CODE = 1000;
-    private View detectButton;
-    private View selectButton;
-    private View selectAnotherButton;
-    private TextView selectAnotherText;
+    private Button detectButton;
+    private Button selectButton;
+
+    private TextView selectAnotherButton;
     private TextView entryText;
-    private TextView selectImageText;
-    private TextView detectText;
     private TextView scoreText;
     private TextView comment;
 
     private ImageView imageView;
     private Boolean detectFlag = false;
-    int currImageScore;
+    private Boolean tryFlag = false;
+//    int currImageScore;
+    int currScore;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -105,22 +107,26 @@ public class Frame_2 extends Fragment {
         // state 2
         imageView = view.findViewById(R.id.imageView);
         detectButton = view.findViewById(R.id.detect_button);
-        detectText = view.findViewById(R.id.detect);
         selectAnotherButton = view.findViewById(R.id.select_another_button);
-        selectAnotherText = view.findViewById(R.id.select_another_text);
         scoreText = view.findViewById(R.id.score_text);
         comment = view.findViewById(R.id.comment);
 
         //state 1
         selectButton = view.findViewById(R.id.select_button);
         entryText = view.findViewById(R.id.this_is_mac);
-        selectImageText = view.findViewById(R.id.select_an_i);
 
         try {
-            classifier = new Classifier(getActivity(),1);
+            classifier = new Classifier(getActivity(),1,"labels.txt","bc_mobileNetV2.tflite");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try {
+            rmclassifier = new Classifier(getActivity(),1,"rmlabels.txt","mmc4.tflite");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -132,6 +138,14 @@ public class Frame_2 extends Fragment {
             @Override
             public void onClick(View v){
                 selectImageFromGallery();
+                imageView.setVisibility(View.GONE);
+                detectButton.setVisibility(View.GONE);
+                selectAnotherButton.setVisibility(View.GONE);
+
+                //set gone for state 1
+                entryText.setVisibility(View.VISIBLE);
+                selectButton.setVisibility(View.VISIBLE);
+                comment.setVisibility(View.GONE);
             }
         });
 
@@ -140,7 +154,7 @@ public class Frame_2 extends Fragment {
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v){
-                if(detectFlag){
+                if(detectFlag || tryFlag){
                     Bitmap bitmap = convertImageViewToBitmap(imageView);
 
                     List<Classifier.Recognition> list = classifier.classify(bitmap,0);
@@ -189,51 +203,28 @@ public class Frame_2 extends Fragment {
 
             // Convert it to a bitmap which will be used for inference
             Bitmap imageBitmap = convertImageViewToBitmap(imageView);
-            imageView.setImageBitmap(imageBitmap);
-            //check proximity
-            if(proximityScoreCheck(imageBitmap)<6){
+            float k = randomVsMammogramCheck(imageBitmap);
+            int prscore = proximityScoreCheck(imageBitmap);
+            // now we will have 4 cases as per the case we will have the comment.
+            final String comm;
+
+            if(k==0 && prscore<6){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("This does not look like a Histopathological Image, would you still like to continue?")
-                        .setTitle("Are you Sure?")
-                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // CONFIRM
-                                // set visible for state 2
-                                imageView.setVisibility(View.VISIBLE);
-                                detectButton.setVisibility(View.VISIBLE);
-                                detectText.setVisibility(View.VISIBLE);
-                                selectAnotherText.setVisibility(View.VISIBLE);
-                                selectAnotherButton.setVisibility(View.VISIBLE);
-
-                                //set gone for state 1
-                                entryText.setVisibility(View.GONE);
-                                selectButton.setVisibility(View.GONE);
-                                selectImageText.setVisibility(View.GONE);
-
-                                // set score text;
-                                String st = "Proximity Score : "+currImageScore+"/9";
-                                String comm;
-                                if(currImageScore<6){
-                                    comm = "Classification might not be reliable.";
-
-                                    comment.setTextColor(Color.parseColor("#8B0000"));
-                                }
-                                else {
-                                    comm = "\n Good score!";
-                                    comment.setTextColor(Color.parseColor("#6BB26B"));
-                                }
-                                scoreText.setVisibility(View.VISIBLE);
-                                scoreText.setText(st);
-                                comment.setVisibility(View.VISIBLE);
-                                comment.setText(comm);
-
-                            }
-                        })
-                        .setNegativeButton("retry", new DialogInterface.OnClickListener() {
+                builder.setMessage("This does not look like a Histopathological image, choose another")
+                        .setTitle("Random image detected")
+                        .setPositiveButton("retry", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // CANCEL
 
                                 selectImageFromGallery();
+                                imageView.setVisibility(View.GONE);
+                                detectButton.setVisibility(View.GONE);
+                                selectAnotherButton.setVisibility(View.GONE);
+
+                                //set gone for state 1
+                                entryText.setVisibility(View.VISIBLE);
+                                selectButton.setVisibility(View.VISIBLE);
+                                comment.setVisibility(View.GONE);
 
                             }
                         });
@@ -241,40 +232,137 @@ public class Frame_2 extends Fragment {
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
+
+            else if(k==0 && prscore>=6){
+
+                comm = "Good proximity score "+prscore+"/9 but this was not detected as a Mammogram. results might not be reliable";
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("This does not look like a Histopathological image, would you still to continue?")
+                        .setTitle("Random image detected")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // CONFIRM
+                                // set visible for state 2
+                                imageView.setVisibility(View.VISIBLE);
+                                detectButton.setVisibility(View.VISIBLE);
+                                selectAnotherButton.setVisibility(View.VISIBLE);
+
+                                comment.setTextColor(Color.parseColor("#8B0000"));
+                                comment.setText(comm);
+                                comment.setVisibility(View.VISIBLE);
+
+                                //set gone for state 1
+                                entryText.setVisibility(View.GONE);
+                                selectButton.setVisibility(View.GONE);
+                            }
+                        })
+                        .setNegativeButton("retry", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // CANCEL
+
+                                selectImageFromGallery();
+                                imageView.setVisibility(View.GONE);
+                                detectButton.setVisibility(View.GONE);
+                                selectAnotherButton.setVisibility(View.GONE);
+
+                                //set gone for state 1
+                                entryText.setVisibility(View.VISIBLE);
+                                selectButton.setVisibility(View.VISIBLE);
+                                comment.setVisibility(View.GONE);
+
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+            else if(k==1 && prscore<6){
+
+                comm = "Poor proximity score "+prscore+"/9 but this was detected as a Mammogram. results might not be reliable";
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("This does not look like a Histopathological image, would you still to continue?")
+                        .setTitle("Random image detected")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                // CONFIRM
+                                // set visible for state 2
+                                imageView.setVisibility(View.VISIBLE);
+                                detectButton.setVisibility(View.VISIBLE);
+                                selectAnotherButton.setVisibility(View.VISIBLE);
+
+                                comment.setTextColor(Color.parseColor("#8B0000"));
+                                comment.setText(comm);
+                                comment.setVisibility(View.VISIBLE);
+
+                                //set gone for state 1
+                                entryText.setVisibility(View.GONE);
+                                selectButton.setVisibility(View.GONE);
+                            }
+                        })
+                        .setNegativeButton("retry", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // CANCEL
+
+                                selectImageFromGallery();
+                                imageView.setVisibility(View.GONE);
+                                detectButton.setVisibility(View.GONE);
+                                selectAnotherButton.setVisibility(View.GONE);
+
+                                //set gone for state 1
+                                entryText.setVisibility(View.VISIBLE);
+                                selectButton.setVisibility(View.VISIBLE);
+                                comment.setVisibility(View.GONE);
+
+                            }
+                        });
+                // Create the AlertDialog object and return it
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
             else{
-                // Navigate to next
-                // set visible for state 2
+                comm =  "Good proximity score "+prscore+"/9 you can go ahead!";
+
                 imageView.setVisibility(View.VISIBLE);
                 detectButton.setVisibility(View.VISIBLE);
-                detectText.setVisibility(View.VISIBLE);
-                selectAnotherText.setVisibility(View.VISIBLE);
                 selectAnotherButton.setVisibility(View.VISIBLE);
 
-
+                comment.setTextColor(Color.parseColor("#008000"));
+                comment.setText(comm);
+                comment.setVisibility(View.VISIBLE);
 
                 //set gone for state 1
                 entryText.setVisibility(View.GONE);
                 selectButton.setVisibility(View.GONE);
-                selectImageText.setVisibility(View.GONE);
-                // set score text;
-                String st = "Proximity Score : "+currImageScore+"/9";
-                String comm;
-                if(currImageScore<6){
-                    comm = "Classification might not be reliable.";
-
-                    comment.setTextColor(Color.parseColor("#8B0000"));
-                }
-                else {
-                    comm = "\n Good quality Histopathological image! proceed to detect";
-                    comment.setTextColor(Color.parseColor("#6BB26B"));
-                }
-                scoreText.setVisibility(View.VISIBLE);
-                scoreText.setText(st);
-                comment.setVisibility(View.VISIBLE);
-                comment.setText(comm);
             }
+
         }
+
     }
+
+    private float randomVsMammogramCheck(Bitmap bitmap){
+        List<Classifier.Recognition> list = rmclassifier.classify(bitmap,0);
+        int score;
+        String primary = list.get(0).getTitle();
+        if(primary.equals("Random")){
+            score =  0;
+        }
+        else{
+            Float primaryConfidence = roundOff(list.get(0).getConfidence());
+            if(primaryConfidence < 98) score = 0;
+            else
+                score = 1;
+        }
+        //Toast toast1 = Toast.makeText(getActivity().getApplicationContext(), primary, Toast.LENGTH_SHORT);
+        //toast1.show();
+
+        currScore =  score;
+        return score;
+
+    }
+
     private Bitmap convertImageViewToBitmap(ImageView iView){
         BitmapDrawable drawable = (BitmapDrawable) iView.getDrawable();
         Bitmap bitmap = drawable.getBitmap();
@@ -298,7 +386,7 @@ public class Frame_2 extends Fragment {
                 score+=1;
             }
         }
-        currImageScore = score;
+
         return score;
     }
 
