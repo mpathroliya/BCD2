@@ -26,4 +26,5 @@
     <string name="using">Using CNN</string>
     <string name="machine_lea">IIT(BHU)</string>
     <string name="breast_canc">Breast\nCancer\nDetection</string>
+    <string name="dwld_text">Save Report</string>
 </resources>

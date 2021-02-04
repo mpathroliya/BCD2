@@ -1,20 +1,39 @@
 package com.edge.iitbhu.bcdetecttf_gui;
-
+import android.util.Log;
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.net.*;
 
 import java.util.List;
 
@@ -38,6 +57,7 @@ public class Frame_3 extends Fragment {
     TextView confSecondary;
     byte[] imageArray;
     ImageView imageView;
+    private Button saveButton;
 
 
     // TODO: Rename and change types of parameters
@@ -83,6 +103,7 @@ public class Frame_3 extends Fragment {
             imageArray = getArguments().getByteArray("image");
             bmp = BitmapFactory.decodeByteArray(imageArray, 0, imageArray.length);
         }
+
     }
 
     @Override
@@ -100,20 +121,51 @@ public class Frame_3 extends Fragment {
         confPrimary = view.findViewById(R.id.conf_primary);
         confSecondary = view.findViewById(R.id.conf_secondary);
         imageView = view.findViewById(R.id.imageView);
+        saveButton = view.findViewById(R.id.save_button);
 
         imageView.setImageBitmap(bmp);
         resPrimary.setText(primary);
         resSecondary.setText(secondary);
         confPrimary.setText(Float.toString(primaryConfidence)+" %");
         confSecondary.setText(Float.toString(secondaryConfidence)+" %");
-//        selectButton = view.findViewById(R.id.select_button);
-//
-//        selectButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v){
-//                NavController navController = Navigation.findNavController(v);
-//                navController.navigate(R.id.action_frame_12_to_frame_22);
-//            }
-//        });
+
+        saveButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+//                Toast toast1 = Toast.makeText(getActivity().getApplicationContext(), "Save button works!", Toast.LENGTH_SHORT);
+//                toast1.show();
+
+                ActivityCompat.requestPermissions(getActivity(),new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+
+                createPDF();
+            }
+        });
+    }
+
+    private void createPDF() {
+        PdfDocument myPdfDocument = new PdfDocument();
+        Paint myPaint = new Paint();
+
+        PdfDocument.PageInfo myPageInfo1 = new PdfDocument.PageInfo.Builder(250, 400,1).create();
+        PdfDocument.Page myPage1 = myPdfDocument.startPage(myPageInfo1);
+        Canvas canvas = myPage1.getCanvas();
+
+        canvas.drawText("pdf generation testing",40, 50 , myPaint);
+        myPdfDocument.finishPage(myPage1);
+
+        File file = new File(Environment.getExternalStorageDirectory(),"/bc_report.pdf");
+
+        try{
+            myPdfDocument.writeTo(new FileOutputStream(file));
+            Toast toast1 = Toast.makeText(getActivity().getApplicationContext(), "Saved!", Toast.LENGTH_SHORT);
+            toast1.show();
+        } catch(IOException e){
+//            e.printStackTrace();
+            Log.d("Pdf Error", e.getMessage());
+            Toast toast1 = Toast.makeText(getActivity().getApplicationContext(), "Couldn't save", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
+        myPdfDocument.close();
     }
 }

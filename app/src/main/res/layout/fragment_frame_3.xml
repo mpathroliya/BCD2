@@ -43,8 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86">
-
+        app:layout_constraintVertical_bias="0.75">
 
 
         <View
@@ -144,6 +143,22 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="189dp"
+        android:layout_height="56dp"
+        android:background="@drawable/rectangle_1"
+        android:elevation="35dp"
+        android:fontFamily="@font/red_hat_display_black"
+        android:text="Save"
+        android:textColor="@color/colorOffwhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.84000003" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
