@@ -52,7 +52,7 @@
     <style name="res_primary">
 
         <item name="android:textSize">
-            45sp
+            43sp
         </item>
 
         <item name="android:letterSpacing">
@@ -84,7 +84,7 @@
     <style name="res_secondary">
 
         <item name="android:textSize">
-            30sp
+            25sp
         </item>
 
         <item name="android:letterSpacing">
@@ -100,7 +100,7 @@
     <style name="conf_secondary">
 
         <item name="android:textSize">
-            20sp
+            18sp
         </item>
 
         <item name="android:letterSpacing">
@@ -152,6 +152,7 @@
         </item>
 
     </style>
+
     <style name="try_another">
 
         <item name="android:textSize">
@@ -164,6 +165,7 @@
         </item>
 
     </style>
+
     <style name="using">
 
         <item name="android:textSize">
@@ -175,6 +177,7 @@
         </item>
 
     </style>
+
     <style name="machine_lea">
 
         <item name="android:textSize">
@@ -186,6 +189,7 @@
         </item>
 
     </style>
+
     <style name="breast_canc">
 
         <item name="android:textSize">

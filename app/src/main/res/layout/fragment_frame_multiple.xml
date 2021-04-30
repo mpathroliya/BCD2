@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_frame_multiple"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:backgroundTint="@color/colorOffwhite"
+    android:visibility="visible">
+
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="189dp"
+        android:layout_height="56dp"
+        android:background="@drawable/rectangle_1"
+        android:elevation="35dp"
+        android:fontFamily="@font/red_hat_display_black"
+        android:text="Save"
+        android:textColor="@color/colorOffwhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.93" />
+
+    <View
+        android:id="@drawable/ic_bubbles_1"
+        android:layout_width="416dp"
+        android:layout_height="740dp"
+        android:background="@drawable/ic_bubbles_1"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_images"
+        android:layout_width="361dp"
+        android:layout_height="356dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/multi_im_1"
+                android:layout_width="333dp"
+                android:layout_height="352dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <ImageView
+                android:id="@+id/multi_im_2"
+                android:layout_width="333dp"
+                android:layout_height="352dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <ImageView
+                android:id="@+id/multi_im_3"
+                android:layout_width="333dp"
+                android:layout_height="352dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <ImageView
+                android:id="@+id/multi_im_4"
+                android:layout_width="333dp"
+                android:layout_height="352dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <ImageView
+                android:id="@+id/multi_im_5"
+                android:layout_width="333dp"
+                android:layout_height="352dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <View
+        android:id="@+id/ic_card"
+        android:layout_width="420dp"
+        android:layout_height="333dp"
+        android:background="@drawable/ic_card"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroll_images"
+        app:layout_constraintVertical_bias="0.16000003" />
+
+    <TextView
+        android:id="@+id/result_heading"
+        android:layout_width="160dp"
+        android:layout_height="33dp"
+        android:fontFamily="@font/red_hat_display_medium"
+        android:gravity="top"
+        android:text="@string/results_heading"
+        android:textAppearance="@style/results_heading"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_card"
+        app:layout_constraintEnd_toEndOf="@+id/ic_card"
+        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintStart_toStartOf="@+id/ic_card"
+        app:layout_constraintTop_toTopOf="@id/ic_card"
+        app:layout_constraintVertical_bias="0.100000024" />
+
+    <ScrollView
+        android:layout_width="384dp"
+        android:layout_height="191dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_card"
+        app:layout_constraintEnd_toEndOf="@+id/ic_card"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/ic_card"
+
+        app:layout_constraintTop_toTopOf="@id/ic_card"
+        app:layout_constraintVertical_bias="0.45">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/summary"
+                android:layout_width="325dp"
+                android:layout_height="148dp"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingBottom="7dp"
+                android:text="Summary"
+                android:textAppearance="@style/res_primary" />
+            android:text="summaryText" />
+
+            <TextView
+                android:id="@+id/res1"
+                style="@style/res_secondary"
+                android:layout_width="325dp"
+                android:layout_height="49dp"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="res1" />
+
+            <TextView
+                android:id="@+id/res2"
+                style="@style/res_secondary"
+                android:layout_width="325dp"
+                android:layout_height="49dp"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="res 2" />
+
+            <TextView
+                android:id="@+id/res3"
+                style="@style/res_secondary"
+                android:layout_width="325dp"
+                android:layout_height="49dp"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="res 3" />
+
+            <TextView
+                android:id="@+id/res4"
+                style="@style/res_secondary"
+                android:layout_width="325dp"
+                android:layout_height="49dp"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="res 4" />
+
+            <TextView
+                android:id="@+id/res5"
+                style="@style/res_secondary"
+                android:layout_width="325dp"
+                android:layout_height="49dp"
+                android:fontFamily="@font/red_hat_display_black"
+                android:text="res 5" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

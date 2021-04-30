@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/frame_22">
 
     <fragment
@@ -9,10 +11,34 @@
         android:label="Frame_2" >
         <action
             android:id="@+id/action_frame_22_to_frame_32"
-            app:destination="@id/frame_32" />
+            app:destination="@id/frame_32"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_out_right"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_frame_22_to_frame_12"
+            app:destination="@id/frame_12"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_frame_22_to_frameMultiple"
+            app:destination="@id/frameMultiple" />
     </fragment>
     <fragment
         android:id="@+id/frame_32"
         android:name="com.edge.iitbhu.bcdetecttf_gui.Frame_3"
         android:label="Frame_3" />
+    <fragment
+        android:id="@+id/frame_12"
+        android:name="com.edge.iitbhu.bcdetecttf_gui.Frame_1"
+        android:label="Frame_1" />
+    <fragment
+        android:id="@+id/frameMultiple"
+        android:name="com.edge.iitbhu.bcdetecttf_gui.FrameMultiple"
+        android:label="fragment_frame_multiple"
+        tools:layout="@layout/fragment_frame_multiple" />
 </navigation>

@@ -9,13 +9,84 @@
     android:background="@color/colorOffwhite"
     >
 
+    <TextView
+        android:id="@+id/n_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/red_hat_display_medium"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:text="5 images selected"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/scroll_comments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75" />
+
+    <TextView
+        android:id="@+id/full_name"
+        android:layout_width="365dp"
+        android:layout_height="135dp"
+        android:fontFamily="@font/red_hat_display_black"
+        android:text="Welcome"
+        android:textAlignment="center"
+        android:textColor="#404040"
+        android:textSize="36sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999" />
+
+    <TextView
+        android:id="@+id/about_button"
+        android:layout_width="168dp"
+        android:layout_height="42dp"
+        android:drawablePadding="10dp"
+        android:elevation="35dp"
+        android:fontFamily="@font/red_hat_display_black"
+        android:text="Learn More"
+        android:textAlignment="center"
+        android:textColor="#2180FF"
+        android:textColorHighlight="#FFFFFF"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48000002" />
+
+
+
+    <TextView
+        android:id="@+id/logout_button"
+        android:layout_width="99dp"
+        android:layout_height="36dp"
+        android:fontFamily="@font/red_hat_display_black"
+        android:onClick="logout"
+        android:text="Logout"
+        android:textAlignment="center"
+        android:textColor="#ACACAC"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
     <!-- Rectangle 1 -->
     <View
         android:id="@drawable/ic_bubbles_1"
         android:layout_width="414dp"
         android:layout_height="872dp"
         android:background="@drawable/ic_bubbles_1"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -25,9 +96,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="fill_parent"
-        android:layout_height="496dp"
-        android:layout_marginBottom="336dp"
+        android:layout_width="366dp"
+        android:layout_height="520dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/image_content"
         android:scaleType="fitCenter"
@@ -36,7 +106,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.120000005" />
 
 
     <Button
@@ -55,10 +127,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.97" />
 
+    <Button
+        android:id="@+id/multiple"
+        android:layout_width="197dp"
+        android:layout_height="73dp"
+        android:background="@drawable/rec3"
+        android:elevation="35dp"
+        android:fontFamily="@font/red_hat_display_black"
+        android:text="SELECT MULTIPLE"
+        android:textAppearance="@style/select_an_i"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74" />
+
     <TextView
         android:id="@+id/select_another_button"
-        android:layout_width="145dp"
-        android:layout_height="40dp"
+        android:layout_width="238dp"
+        android:layout_height="33dp"
         android:layout_marginTop="1dp"
         android:fontFamily="@font/red_hat_display_medium"
         android:text="@string/try_another"
@@ -69,7 +159,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.937" />
+        app:layout_constraintVertical_bias="0.9" />
 
     <TextView
         android:id="@+id/score_text"
@@ -91,55 +181,204 @@
 
     <TextView
         android:id="@+id/comment"
-        android:layout_width="334dp"
-        android:layout_height="41dp"
+        android:layout_width="336dp"
+        android:layout_height="54dp"
         android:fontFamily="@font/red_hat_display_black"
         android:text="comment"
         android:textAlignment="center"
+        android:textSize="18sp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/detect_button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.651" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.71000004" />
 
     <TextView
         android:id="@+id/this_is_mac"
-        android:layout_width="305dp"
-        android:layout_height="229dp"
+        android:layout_width="189dp"
+        android:layout_height="125dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:fontFamily="@font/red_hat_display_black"
+        android:fontFamily="@font/red_hat_display_medium"
         android:gravity="center_horizontal|top"
         android:text="@string/this_is_mac"
+        android:textAlignment="center"
         android:textAppearance="@style/this_is_mac"
+        android:textSize="18sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintVertical_bias="0.37" />
 
 
     <Button
         android:id="@+id/select_button"
-        android:layout_width="208dp"
-        android:layout_height="83dp"
+        android:layout_width="197dp"
+        android:layout_height="73dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rectangle_1"
         android:elevation="35dp"
-        android:fontFamily="@font/red_hat_display_black"
+        android:fontFamily="@font/red_hat_display_medium"
         android:text="@string/select_an_i"
         android:textAppearance="@style/select_an_i"
+        android:textSize="12sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.754" />
+        app:layout_constraintVertical_bias="0.6" />
+
+<!--    <HorizontalScrollView-->
+<!--        android:id="@+id/scroll_images"-->
+<!--        android:layout_width="408dp"-->
+<!--        android:layout_height="341dp"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.497"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.14999998">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="horizontal">-->
+
+<!--        </LinearLayout>-->
+<!--    </HorizontalScrollView>-->
+
+    <ScrollView
+        android:id="@+id/scroll_comments"
+        android:layout_width="382dp"
+        android:layout_height="458dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/fab_margin"
+            android:paddingBottom="@dimen/fab_margin">
+
+            <ImageView
+                android:id="@+id/multi_im_1"
+                android:layout_width="match_parent"
+                android:layout_height="362dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/comm_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp"
+                android:text="casdfa"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/multi_im_2"
+                android:layout_width="match_parent"
+                android:layout_height="356dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/comm_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp"
+                android:text="casdfa"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/multi_im_3"
+                android:layout_width="match_parent"
+                android:layout_height="355dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/comm_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/multi_im_4"
+                android:layout_width="match_parent"
+                android:layout_height="352dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/comm_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/multi_im_5"
+                android:layout_width="match_parent"
+                android:layout_height="352dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/comm_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/red_hat_display_black"
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

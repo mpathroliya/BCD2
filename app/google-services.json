@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "204069040724",
+    "project_id": "bcdetect-377c7",
+    "storage_bucket": "bcdetect-377c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204069040724:android:99467b71c7145132e633c1",
+        "android_client_info": {
+          "package_name": "com.edge.iitbhu.bcdetecttf_gui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "204069040724-e2rft90hvk58u9s35ne4svo7us2cm5f2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edge.iitbhu.bcdetecttf_gui",
+            "certificate_hash": "bd6ef0011a97309ccf8d01fa096248b512df1a43"
+          }
+        },
+        {
+          "client_id": "204069040724-nkfaap58vnef63ocru0tk2pla1rl82rf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEbjVU6-groUumPuALPYi_iueLr9Zky7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "204069040724-nkfaap58vnef63ocru0tk2pla1rl82rf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
