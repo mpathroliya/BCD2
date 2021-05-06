@@ -37,6 +37,14 @@ public class Frame_1 extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        backButton = view.findViewById(R.id.main_back_button);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_frame_12_to_frame_22);
+            }
+        });
     }
 }

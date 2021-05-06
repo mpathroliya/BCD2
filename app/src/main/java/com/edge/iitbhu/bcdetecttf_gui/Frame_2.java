@@ -8,10 +8,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import java.time.Duration;
+import java.time.Instant;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -60,7 +64,7 @@ public class Frame_2 extends Fragment {
 
     private Classifier classifier,  rmclassifier;
     private static final int IMAGE_PICK_CODE = 1000;
-    private Button detectButton, selectButton, multiple;
+    private Button detectButton, selectButton, multiple, reportsButton,backButton;
 
 
     private TextView selectAnotherButton, entryText, comment, nameView, nSelected;
@@ -136,7 +140,9 @@ public class Frame_2 extends Fragment {
 
         imageUris = new ArrayList<String>();
         nSelected = view.findViewById(R.id.n_selected);
+        reportsButton = view.findViewById(R.id.reports_button);
         detectButton = view.findViewById(R.id.detect_button);
+        backButton = view.findViewById(R.id.main_back_button);
         detectButton.setText("Predict");
         selectAnotherButton = view.findViewById(R.id.select_another_button);
         selectAnotherButton.setText("New Test");
@@ -230,23 +236,38 @@ public class Frame_2 extends Fragment {
         aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity().getApplicationContext()," helloo" , Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity().getApplicationContext()," helloo" , Toast.LENGTH_SHORT).show();
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_frame_22_to_frame_12);
 
             }
         });
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setState1(true);
+                setState2Multiple(false);
+                setState2Single(false);
+            }
+        });
+
 
         detectButton.setOnClickListener(new View.OnClickListener(){
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @SuppressLint("ResourceType")
             @Override
             public void onClick(View v){
                 if(multiFlag==false){
                     if(detectFlag || tryFlag){
                         Bitmap bitmap = BcUtils.get().convertImageViewToBitmap(imageView);
-
+//                        Instant start = Instant.now();
                         List<Classifier.Recognition> list = classifier.classify(bitmap,0);
+
+//                        Instant end = Instant.now();
+//                        Duration timeElapsed = Duration.between(start, end);
+//                        String elapsed = "Time taken: "+ timeElapsed.toMillis() +" milliseconds";
+//                        Toast.makeText(getContext(),elapsed ,Toast.LENGTH_SHORT).show();
 
                         String primary = list.get(0).getTitle();
                         Float primaryConfidence = BcUtils.get().roundOff(list.get(0).getConfidence());
@@ -458,7 +479,6 @@ public class Frame_2 extends Fragment {
             }
 
             // define behaviours
-
             if(negFlag==true){
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("This does not look like a Histopathological image, choose another")
@@ -652,6 +672,7 @@ public class Frame_2 extends Fragment {
             detectButton.setVisibility(View.VISIBLE);
             selectAnotherButton.setVisibility(View.VISIBLE);
             comment.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.VISIBLE);
         }
         else{
             imageView.setVisibility(View.GONE);
@@ -663,6 +684,7 @@ public class Frame_2 extends Fragment {
                 cmt.get(i).setVisibility(View.GONE);
             }
             nSelected.setVisibility(View.GONE);
+            backButton.setVisibility(View.GONE);
         }
     }
 
@@ -675,6 +697,7 @@ public class Frame_2 extends Fragment {
             detectButton.setVisibility(View.VISIBLE);
             selectAnotherButton.setVisibility(View.VISIBLE);
             nSelected.setVisibility(View.VISIBLE);
+            backButton.setVisibility(View.VISIBLE);
         }
         else{
             imageView.setVisibility(View.GONE);
@@ -686,6 +709,7 @@ public class Frame_2 extends Fragment {
                 cmt.get(i).setVisibility(View.GONE);
             }
             nSelected.setVisibility(View.GONE);
+            backButton.setVisibility(View.GONE);
         }
     }
 
@@ -696,6 +720,7 @@ public class Frame_2 extends Fragment {
             selectButton.setVisibility(View.VISIBLE);
             multiple.setVisibility(View.VISIBLE);
             nameView.setVisibility(View.VISIBLE);
+            reportsButton.setVisibility(View.VISIBLE);
         }
         else{
             entryText.setVisibility(View.GONE);
@@ -703,6 +728,7 @@ public class Frame_2 extends Fragment {
             selectButton.setVisibility(View.GONE);
             multiple.setVisibility(View.GONE);
             nameView.setVisibility(View.GONE);
+            reportsButton.setVisibility(View.GONE);
         }
     }
 

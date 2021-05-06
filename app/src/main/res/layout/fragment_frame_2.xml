@@ -1,13 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frame_2"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/colorOffwhite"
-    >
+    android:background="@color/colorOffwhite">
+
+    <Button
+        android:id="@+id/main_back_button"
+        android:layout_width="46dp"
+        android:layout_height="39dp"
+        android:background="?attr/homeAsUpIndicator"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
+
+    <Button
+        android:id="@+id/reports_button"
+        android:layout_width="171dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="135dp"
+        android:background="@drawable/rec2"
+        android:fontFamily="@font/red_hat_display_medium"
+        android:onClick="viewReports"
+        android:text="VIEW REPORTS"
+        android:textAlignment="center"
+        android:textColor="#2180FF"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multiple" />
 
     <TextView
         android:id="@+id/n_selected"
@@ -24,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="0.77" />
 
     <TextView
         android:id="@+id/full_name"
@@ -42,6 +71,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.19999999" />
 
+
     <TextView
         android:id="@+id/about_button"
         android:layout_width="168dp"
@@ -57,11 +87,10 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48000002" />
-
-
+        app:layout_constraintVertical_bias="0.483" />
 
     <TextView
         android:id="@+id/logout_button"
@@ -113,8 +142,8 @@
 
     <Button
         android:id="@+id/detect_button"
-        android:layout_width="175dp"
-        android:layout_height="63dp"
+        android:layout_width="158dp"
+        android:layout_height="55dp"
         android:background="@drawable/rectangle_1"
         android:elevation="50dp"
         android:fontFamily="@font/red_hat_display_black"
@@ -129,8 +158,8 @@
 
     <Button
         android:id="@+id/multiple"
-        android:layout_width="197dp"
-        android:layout_height="73dp"
+        android:layout_width="177dp"
+        android:layout_height="59dp"
         android:background="@drawable/rec3"
         android:elevation="35dp"
         android:fontFamily="@font/red_hat_display_black"
@@ -138,19 +167,20 @@
         android:textAppearance="@style/select_an_i"
         android:textSize="12sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/reports_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintTop_toBottomOf="@+id/select_button" />
 
     <TextView
         android:id="@+id/select_another_button"
-        android:layout_width="238dp"
-        android:layout_height="33dp"
+        android:layout_width="158dp"
+        android:layout_height="49dp"
         android:layout_marginTop="1dp"
+        android:background="@drawable/rec2"
         android:fontFamily="@font/red_hat_display_medium"
+        android:padding="10dp"
         android:text="@string/try_another"
         android:textAlignment="center"
         android:textAppearance="@style/try_another"
@@ -181,8 +211,8 @@
 
     <TextView
         android:id="@+id/comment"
-        android:layout_width="336dp"
-        android:layout_height="54dp"
+        android:layout_width="332dp"
+        android:layout_height="105dp"
         android:fontFamily="@font/red_hat_display_black"
         android:text="comment"
         android:textAlignment="center"
@@ -214,14 +244,35 @@
         app:layout_constraintVertical_bias="0.37" />
 
 
+    <!--    <HorizontalScrollView-->
+    <!--        android:id="@+id/scroll_images"-->
+    <!--        android:layout_width="408dp"-->
+    <!--        android:layout_height="341dp"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.497"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.14999998">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:orientation="horizontal">-->
+
+    <!--        </LinearLayout>-->
+    <!--    </HorizontalScrollView>-->
+
     <Button
         android:id="@+id/select_button"
-        android:layout_width="197dp"
-        android:layout_height="73dp"
+        android:layout_width="179dp"
+        android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
         android:background="@drawable/rectangle_1"
         android:elevation="35dp"
         android:fontFamily="@font/red_hat_display_medium"
@@ -229,31 +280,10 @@
         android:textAppearance="@style/select_an_i"
         android:textSize="12sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/multiple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
-
-<!--    <HorizontalScrollView-->
-<!--        android:id="@+id/scroll_images"-->
-<!--        android:layout_width="408dp"-->
-<!--        android:layout_height="341dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.497"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.14999998">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal">-->
-
-<!--        </LinearLayout>-->
-<!--    </HorizontalScrollView>-->
+        app:layout_constraintTop_toBottomOf="@+id/about_button" />
 
     <ScrollView
         android:id="@+id/scroll_comments"
@@ -285,11 +315,11 @@
             <TextView
                 android:id="@+id/comm_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="127dp"
                 android:fontFamily="@font/red_hat_display_black"
                 android:paddingTop="10dp"
                 android:paddingBottom="15dp"
-                android:text="casdfa"
+                android:text="Good proximity score 6/9 but this was not detected as a Mammogram. results might not be reliable"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:visibility="gone" />
@@ -305,12 +335,12 @@
 
             <TextView
                 android:id="@+id/comm_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="364dp"
+                android:layout_height="132dp"
                 android:fontFamily="@font/red_hat_display_black"
                 android:paddingTop="10dp"
                 android:paddingBottom="15dp"
-                android:text="casdfa"
+                android:text="Good proximity score 6/9 but this was not detected as a Mammogram. results might not be reliable"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:visibility="gone" />
@@ -327,11 +357,11 @@
             <TextView
                 android:id="@+id/comm_3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="132dp"
                 android:fontFamily="@font/red_hat_display_black"
                 android:paddingTop="10dp"
                 android:paddingBottom="15dp"
-                android:text="TextView"
+                android:text="Good proximity score 6/9 but this was not detected as a Mammogram. results might not be reliable"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:visibility="gone" />
@@ -348,11 +378,11 @@
             <TextView
                 android:id="@+id/comm_4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="132dp"
                 android:fontFamily="@font/red_hat_display_black"
                 android:paddingTop="10dp"
                 android:paddingBottom="15dp"
-                android:text="TextView"
+                android:text="Good proximity score 6/9 but this was not detected as a Mammogram. results might not be reliable"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:visibility="gone" />
@@ -369,14 +399,15 @@
             <TextView
                 android:id="@+id/comm_5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="133dp"
                 android:fontFamily="@font/red_hat_display_black"
                 android:paddingTop="10dp"
                 android:paddingBottom="15dp"
-                android:text="TextView"
+                android:text="Good proximity score 6/9 but this was not detected as a Mammogram. results might not be reliable"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="gone" />
         </LinearLayout>
     </ScrollView>
 

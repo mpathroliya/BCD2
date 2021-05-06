@@ -31,14 +31,38 @@
     <fragment
         android:id="@+id/frame_32"
         android:name="com.edge.iitbhu.bcdetecttf_gui.Frame_3"
-        android:label="Frame_3" />
+        android:label="Frame_3" >
+        <action
+            android:id="@+id/action_frame_32_to_frame_22"
+            app:destination="@id/frame_22"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/frame_12"
         android:name="com.edge.iitbhu.bcdetecttf_gui.Frame_1"
-        android:label="Frame_1" />
+        android:label="Frame_1" >
+        <action
+            android:id="@+id/action_frame_12_to_frame_22"
+            app:destination="@id/frame_22"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/frameMultiple"
         android:name="com.edge.iitbhu.bcdetecttf_gui.FrameMultiple"
         android:label="fragment_frame_multiple"
-        tools:layout="@layout/fragment_frame_multiple" />
+        tools:layout="@layout/fragment_frame_multiple" >
+        <action
+            android:id="@+id/action_frameMultiple_to_frame_22"
+            app:destination="@id/frame_22"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_in_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
 </navigation>

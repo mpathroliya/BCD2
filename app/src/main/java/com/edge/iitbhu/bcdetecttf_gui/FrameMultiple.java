@@ -22,6 +22,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ import com.google.protobuf.Empty;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOError;
 import java.io.IOException;
 
 import java.text.SimpleDateFormat;
@@ -64,6 +67,7 @@ public class FrameMultiple extends Fragment {
     private Classifier classifier;
     private List<ImageView> m;
     private TextView summaryText;
+    private Button backButton;
     private ImageView iconView;
     private List<TextView> res;
 
@@ -71,7 +75,7 @@ public class FrameMultiple extends Fragment {
     private String mParam1;
     private String mParam2;
     private String s1,s2;
-    private String reportName;
+    private String reportName,reportId, patient;
 
     private List<Bitmap> imageList;
     private Button saveButton;
@@ -128,6 +132,7 @@ public class FrameMultiple extends Fragment {
 
         // define view.
         summaryText = view.findViewById(R.id.summary);
+        backButton = view.findViewById(R.id.main_back_button);
         ImageView mx = view.findViewById(R.id.multi_im_1); m.add(mx);
         mx = view.findViewById(R.id.multi_im_2); m.add(mx);
         mx = view.findViewById(R.id.multi_im_3); m.add(mx);
@@ -165,7 +170,16 @@ public class FrameMultiple extends Fragment {
             public void onClick(View v) {
                 ActivityCompat.requestPermissions(getActivity(),new String[]{
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+                reportId = getTime();
                 makeReport();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_frameMultiple_to_frame_22);
             }
         });
     }
@@ -173,19 +187,19 @@ public class FrameMultiple extends Fragment {
     private void makeReport(){
 //        createPDF();
         reportName = "";
-        final EditText fileName = new EditText(getContext());
+        final EditText patientName = new EditText(getContext());
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        builder.setTitle("Save as")
-                .setMessage("Choose file name")
-                .setView(fileName)
+        builder.setMessage("Add Patient's Name")
+                .setView(patientName)
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        reportName = fileName.getText().toString()+".pdf";
+                        patient = patientName.getText().toString();
+                        reportName = reportId +"_"+patient+".pdf";
 //                        Toast toast1 = Toast.makeText(getActivity().getApplicationContext(), reportName, Toast.LENGTH_SHORT);
 //                        toast1.show();
                         createPDF();
@@ -201,6 +215,7 @@ public class FrameMultiple extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     private void createPDF() {
         PdfDocument myPdfDocument = new PdfDocument();
 
@@ -211,10 +226,10 @@ public class FrameMultiple extends Fragment {
         canvas = drawReport(canvas);
         myPdfDocument.finishPage(myPage1);
 
-        File file = new File(Environment.getExternalStorageDirectory(),reportName);
+        File file = new File(Environment.getExternalStorageDirectory()+ "/" + "BC Reports",reportName);
         try{
             myPdfDocument.writeTo(new FileOutputStream(file));
-            Toast toast1 = Toast.makeText(getActivity().getApplicationContext(), "Saved", Toast.LENGTH_SHORT);
+            Toast toast1 = Toast.makeText(getActivity().getApplicationContext(), "Saved to BC Reports as \n"+reportName, Toast.LENGTH_SHORT);
             toast1.show();
         } catch(IOException e){
 //            e.printStackTrace();
@@ -251,6 +266,7 @@ public class FrameMultiple extends Fragment {
         credTitles.setTypeface(Typeface.DEFAULT_BOLD);
         canvas.drawText("Name: ",80,200,credTitles);
         canvas.drawText("Email: ",80,230,credTitles);
+        canvas.drawText("Patient: ",80,260,credTitles);
         canvas.drawText("Diagnosis Id:",400,200,credTitles);
         canvas.drawText("Diagnosis Summary: ",400,230,credTitles);
 
@@ -261,8 +277,9 @@ public class FrameMultiple extends Fragment {
         credText.setTypeface(Typeface.DEFAULT);
         canvas.drawText(BcUtils.get().getfName()+" "+BcUtils.get().getlName(),150,200,credText);
         canvas.drawText(BcUtils.get().getEmail(),150,230,credText);
-        canvas.drawText(getTime(),630,200,credText);
+        canvas.drawText(reportId,630,200,credText);
         canvas.drawText(s1,630,230,credText);
+        canvas.drawText(patient,160,260,credText);
         canvas.drawText(s2,630,250,credText);
 
 
